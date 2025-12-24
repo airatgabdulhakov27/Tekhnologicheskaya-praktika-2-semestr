@@ -1,0 +1,28 @@
+# Кейс-задача №1
+# Найти сумму отрицательных элементов массива,
+# расположенных между минимальным и максимальным элементами
+
+def sum_negative_between_min_max(arr):
+    if len(arr) < 2:
+        return 0
+
+    min_index = arr.index(min(arr))
+    max_index = arr.index(max(arr))
+
+    start = min(min_index, max_index) + 1
+    end = max(min_index, max_index)
+
+    total = 0
+    for i in range(start, end):
+        if arr[i] < 0:
+            total += arr[i]
+
+    return total
+
+
+# Пример
+A = [3, -5, 7, -2, 4, -1, 9]
+result = sum_negative_between_min_max(A)
+
+print("Массив:", A)
+print("Сумма отрицательных элементов между min и max:", result)
