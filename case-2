@@ -1,0 +1,57 @@
+# Кейс-задача №2
+# Демонстрация работы методов базового и производного классов
+
+class Animal:
+    def __init__(self, name: str):
+        self.name = name
+
+    def info(self) -> str:
+        # метод базового класса
+        return f"Я животное. Меня зовут {self.name}."
+
+    def speak(self) -> str:
+        # метод базового класса (будет переопределён в производных)
+        return "..."
+
+
+class Dog(Animal):
+    def __init__(self, name: str, breed: str):
+        # вызов конструктора базового класса
+        super().__init__(name)
+        self.breed = breed
+
+    def info(self) -> str:
+        # переопределение метода базового класса + использование super()
+        base_text = super().info()
+        return f"{base_text} Я собака породы {self.breed}."
+
+    def speak(self) -> str:
+        # переопределение метода базового класса
+        return "Гав-гав!"
+
+
+def test_program():
+    # Объект базового класса
+    a = Animal("Незнакомец")
+
+    # Объект производного класса
+    d = Dog("Бобик", "Лабрадор")
+
+    print("=== Базовый класс ===")
+    print(a.info())
+    print("Голос:", a.speak())
+
+    print("\n=== Производный класс ===")
+    print(d.info())
+    print("Голос:", d.speak())
+
+    print("\n=== Полиморфизм (один интерфейс — разное поведение) ===")
+    animals = [a, d]
+    for obj in animals:
+        # для Animal и Dog вызывается один и тот же метод speak(),
+        # но результат разный
+        print(f"{obj.name}: {obj.speak()}")
+
+
+if __name__ == "__main__":
+    test_program()
